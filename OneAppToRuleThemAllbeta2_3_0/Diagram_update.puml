@@ -1,0 +1,218 @@
+@startuml
+class com.example.oneapptorulethemall.activities.Splash_screen_book {
+# void onCreate(Bundle)
+}
+class com.example.oneapptorulethemall.entities.Note {
+- int id
+- String title
+- String subtitle
+- String dateTime
+- String note_text
+- String image_pah
+- String color
+- String web_link
++ int getId()
++ void setId(int)
++ String getTitle()
++ void setTitle(String)
++ String getSubtitle()
++ void setSubtitle(String)
++ String getDateTime()
++ void setDateTime(String)
++ String getNote_text()
++ void setNote_text(String)
++ String getImage_pah()
++ void setImage_pah(String)
++ String getColor()
++ void setColor(String)
++ String getWeb_link()
++ void setWeb_link(String)
++ String toString()
+}
+abstract class com.example.oneapptorulethemall.database.NotesDatabase {
+- {static} NotesDatabase notesDatabase
++ {static} NotesDatabase getDataBase(Context)
++ {abstract}NoteDao noteDao()
+}
+class com.example.oneapptorulethemall.NetworkChangeReciver {
++ void onReceive(Context,Intent)
++ boolean isOnline(Context)
+}
+class com.example.oneapptorulethemall.activities.notes_page {
++ {static} int REQUEST_CODE_ADD_NOTE
++ {static} int REQUEST_CODE_UPDATE_NOTE
++ {static} int REQUEST_CODE_SHOW_NOTES
+~ SharedPreferences sharedPreferences
+- RecyclerView notesRecyclerView
+- List<Note> noteList
+- NotesAdapter notesAdapter
+- TextView textView
+- int noteClickedPosition
+# void onCreate(Bundle)
++ void onNotesClicked(Note,int)
+- void getNotes(int,boolean)
+# void onActivityResult(int,int,Intent)
+}
+class com.example.oneapptorulethemall.activities.GetNoteTask {
+# List<Note> doInBackground(Void)
+# void onPostExecute(List<Note>)
+}
+interface com.example.oneapptorulethemall.listeners.NotesListener {
+~ void onNotesClicked(Note,int)
+}
+class com.example.oneapptorulethemall.SQLHelper {
++ {static} String DATABASE_NAME
++ {static} int DATABASE_VERSION
++ {static} String TABLE_NAME
++ {static} String COLUMN_ID
++ {static} String COLUMN_NAME
++ {static} String COLUMN_EMAIL
++ {static} String COLUMN_AGE
++ {static} String COLUMN_PASSWORD
++ {static} String COLUMN_PERMISSION
+- String CREATE_TABLE
++ <<Create>> SQLHelper(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void insertData(User)
++ Cursor getCursor()
++ boolean doesUsernameExist(String)
++ void setProfile(User,String)
++ boolean updatePer(String,String)
+}
+class com.example.oneapptorulethemall.Transfer_page {
+~ SharedPreferences sharedPreferences
+# void onCreate(Bundle)
+}
+class com.example.oneapptorulethemall.Register_page {
+~ EditText edName
+~ SQLHelper helper
+~ SharedPreferences sharedPreferences
+~ Cursor cursor
+~ Button save
+# void onCreate(Bundle)
+# void onDestroy()
++ void onClick(View)
+}
+class com.example.oneapptorulethemall.activities.CreateNoteActivity {
+- {static} int REQUEST_CODE_STORAGE_PERMISSION
+- {static} int REQUEST_CODE_SELECT_IMAGE
+- EditText inputNoteTitle
+- TextView textDateTime
+- View viewSubtitleIndicator
+- String selectedNoteColor
+- ImageView imageNote
+- String selectedImagePath
+- TextView textWebURL
+- LinearLayout layoutWebUrl
+- AlertDialog dialogAddURL
+- Note alreadyAvailableNote
+~ SharedPreferences sharedPreferences
+# void onCreate(Bundle)
+- void setViewOrUpdateNote()
+- void saveNote()
+- void initMiscellaneous()
+- void setSubtitleIndicatorColor()
+- void selectImage()
++ void onRequestPermissionsResult(int,String[],int[])
+# void onActivityResult(int,int,Intent)
+- String getPathFromUri(Uri)
+- void showAddURLDialog()
+}
+class com.example.oneapptorulethemall.activities.SaveNoteTask {
+# Void doInBackground(Void)
+# void onPostExecute(Void)
+}
+class com.example.oneapptorulethemall.activities.DeleteNoteTask {
+# Void doInBackground(Void)
+# void onPostExecute(Void)
+}
+class com.example.oneapptorulethemall.User {
+~ String name
+~ int age
+~ String email
+~ String password
+~ String permission
++ <<Create>> User(String,int,String,String,String)
++ <<Create>> User()
++ String getName()
++ int getAge()
++ String getEmail()
++ String getPassword()
++ String getPermission()
++ void setName(String)
++ void setAge(int)
++ void setEmail(String)
++ void setPassword(String)
++ void setPermission(String)
+}
+class com.example.oneapptorulethemall.MyAdapter {
++ <<Create>> MyAdapter(Context,Cursor)
++ View newView(Context,Cursor,ViewGroup)
++ void bindView(View,Context,Cursor)
+}
+class com.example.oneapptorulethemall.MyService {
+- MediaPlayer mMediaPlayer
++ IBinder onBind(Intent)
++ void onCreate()
++ void onStart(Intent,int)
++ void onDestroy()
+}
+class com.example.oneapptorulethemall.adapters.NotesAdapter {
+- List<Note> notes
+- NotesListener notesListener
++ <<Create>> NotesAdapter(List<Note>,NotesListener)
++ NoteViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(NoteViewHolder,int)
++ int getItemCount()
++ int getItemViewType(int)
+}
+class com.example.oneapptorulethemall.adapters.NotesAdapter$NoteViewHolder {
+~ TextView textTitle
+~ LinearLayout layoutNote
+~ RoundedImageView imageNote
+~ <<Create>> NoteViewHolder(View)
+~ void setNote(Note)
+}
+interface com.example.oneapptorulethemall.dao.NoteDao {
+~ List<Note> getAllNotes()
+~ void insertNote(Note)
+~ void deleteNote(Note)
+}
+class com.example.oneapptorulethemall.ResultActivity {
+# void onCreate(Bundle)
++ void back(View)
+}
+class com.example.oneapptorulethemall.activities.MainActivity {
+~ User user
+~ SharedPreferences sharedPreferences
+~ NetworkChangeReciver broadcastReceiver
+# void onCreate(Bundle)
+# void registerNetworkBroadcastReciver()
+# void unregisterNetwork()
+# void onDestroy()
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.activities.Splash_screen_book
+java.io.Serializable <|.. com.example.oneapptorulethemall.entities.Note
+androidx.room.RoomDatabase <|-- com.example.oneapptorulethemall.database.NotesDatabase
+android.content.BroadcastReceiver <|-- com.example.oneapptorulethemall.NetworkChangeReciver
+com.example.oneapptorulethemall.listeners.NotesListener <|.. com.example.oneapptorulethemall.activities.notes_page
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.activities.notes_page
+com.example.oneapptorulethemall.activities.AsyncTask <|-- com.example.oneapptorulethemall.activities.GetNoteTask
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.oneapptorulethemall.SQLHelper
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.Transfer_page
+com.example.oneapptorulethemall.OnClickListener <|.. com.example.oneapptorulethemall.Register_page
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.Register_page
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.activities.CreateNoteActivity
+com.example.oneapptorulethemall.activities.AsyncTask <|-- com.example.oneapptorulethemall.activities.SaveNoteTask
+com.example.oneapptorulethemall.activities.AsyncTask <|-- com.example.oneapptorulethemall.activities.DeleteNoteTask
+android.widget.CursorAdapter <|-- com.example.oneapptorulethemall.MyAdapter
+android.app.Service <|-- com.example.oneapptorulethemall.MyService
+com.example.oneapptorulethemall.adapters.Adapter <|-- com.example.oneapptorulethemall.adapters.NotesAdapter
+com.example.oneapptorulethemall.adapters.NotesAdapter +.. com.example.oneapptorulethemall.adapters.NotesAdapter$NoteViewHolder
+com.example.oneapptorulethemall.adapters.ViewHolder <|-- com.example.oneapptorulethemall.adapters.NotesAdapter$NoteViewHolder
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.ResultActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.oneapptorulethemall.activities.MainActivity
+@enduml

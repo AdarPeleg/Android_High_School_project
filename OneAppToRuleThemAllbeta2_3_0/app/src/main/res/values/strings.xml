@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">OneAppToRuleThemAll</string>
+    <string name="notetitle">NoteTitle</string>
+    <string name="note_subtitle">Note Subtitle</string>
+    <string name="type_note_here">Type note here!</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="pick_color">Pick color</string>
+    <string name="add_url">Add Url</string>
+    <string name="enter_url">Enter URl</string>
+    <string name="add">ADD</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="all_notes">All Notes</string>
+    <string name="title_activity_thread">Thread</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

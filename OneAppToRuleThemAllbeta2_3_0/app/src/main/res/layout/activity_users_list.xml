@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.oneapptorulethemall.ResultActivity">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+
+    <TextView
+        android:id="@+id/EditTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listview"
+        android:layout_above="@id/EditTitle"
+        android:text="click on user to change permission"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/ubuntu_bold"
+        />
+
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EditTitle"
+        android:text="output!"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/colorDelete"
+        android:fontFamily="@font/ubuntu_medium"
+        />
+
+    <Button
+        android:onClick="back"
+        android:layout_below="@id/output"
+        android:text="back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
